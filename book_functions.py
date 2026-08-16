@@ -1,6 +1,8 @@
 import json
 import os
 
+path = "books_database.json"
+
 def add_book(Title,Author,Series_Name,Series_No,Genre,Book_Type):
 
 
@@ -18,17 +20,15 @@ def add_book(Title,Author,Series_Name,Series_No,Genre,Book_Type):
             "Book Type": "Fiction" if Book_Type.upper() =="F" else "Non-Fiction",
             "Status": "Not Read"
             }
-        book_json = (json.dumps(book_dict))
-
-        if os.path.exists("books_database_json"):
-            with open('books_database.json',"r") as f:
+ 
+        if os.path.exists(path):
+            with open(path,"r") as f:
                 books = json.load(f)
         else:
             books= []
 
         books.append(book_dict)
-
-        with open("books_database.json","w") as f:
+        with open(path,"w") as f:
             json.dump(books,f,indent=4)
 
     else:    
@@ -43,13 +43,25 @@ def add_book(Title,Author,Series_Name,Series_No,Genre,Book_Type):
             "Status":"Not Read"
             }
 
-        if os.path.exists("books_database_json"):
-            with open('books_database.json',"r") as f:
+        if os.path.exists(path):
+            with open(path,"r") as f:
                 books = json.load(f)
         else:
             books= []
 
         books.append(book_dict)
 
-        with open("books_database.json","w") as f:
+        with open(path,"w") as f:
             json.dump(books,f,indent=4)
+
+def list_books():
+    if os.path.exists(path):
+        with open(path,'r') as f:
+            books = json.load(f)
+            for i in books:
+                print(i['Title'] +" " +i['Status'])
+    else:
+        print("Error .json database does not exist.")
+
+def update_book(Name):
+    pass
