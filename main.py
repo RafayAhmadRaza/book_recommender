@@ -25,5 +25,21 @@ if argument == "add":
     book_functions.add_book(title,author,series_name,series_no,genre,book_type)
 elif argument == "list":
     book_functions.list_books()
+elif argument == 'update':
+    name =  input("Enter Title of the book: ")
+    status = input("Enter Status of Book (R-Read CR-Currently Reading, DNF- Did Not Finish, NR- Not Read): ")
+    current_status = None
+    match status:
+        case "R":
+            current_status = "Read"
+        case "CR":
+            current_status = "Currently Reading"
+        case "DNF":
+            current_status = "Did Not Finish"
+        case "NR":
+            current_status = "Not Read"
+
+    book_functions.update_book(name,current_status)
+
 else:
     print("Invalid Arguments")
