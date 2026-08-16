@@ -43,6 +43,12 @@ elif argument == 'update':
 elif argument == 'recommend':
     print("Please wait recommending book!")
     book_functions.recommend_book()
+elif argument == 'current':
+    print("Currently Reading:")
+    book_functions.currently_reading()
+elif argument == 'stats':
+    print("Books Stats!")
+    book_functions.stats()
 
 else:
     print("Invalid Arguments")

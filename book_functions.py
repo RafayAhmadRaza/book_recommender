@@ -150,3 +150,58 @@ def recommend_book():
         else:
 
             print(book)
+def currently_reading():
+    with open(path,"r") as f:
+        books = json.load(f)
+
+        for i in range(len(books)):
+            if books[i]['Status'] == "Currently Reading":
+                print(books[i]['Title'])
+def stats():
+    with open(path, 'r') as f:
+
+        books = json.load(f)
+        currently_reading_counter = 0
+        Finished_counter = 0
+        DNF_counter = 0
+        Fiction_counter = 0
+        Non_Fiction_Counter = 0
+        Series_Counter = 0
+        Standalone_Counter = 0
+        book_series_list = []
+
+        for i in range(len(books)):
+
+            if books[i]["Status"] == "Currently Reading":
+                currently_reading_counter+=1
+            if books[i]["Status"] == "Did Not Finish":
+                DNF_counter+=1
+            if books[i]["Status"] == "Read":
+                Finished_counter+=1
+
+            if books[i]['Book Type'] == 'Fiction':
+                Fiction_counter +=1
+            else:
+                Non_Fiction_Counter+=1
+
+            if books[i]['Series Name'] == None:
+                Standalone_Counter+=1
+            else:
+                if len(book_series_list) == 0:
+                    book_series_list.append(books[i]['Series Name'])
+                    Series_Counter+=1
+                else:
+                    if books[i]['Series Name'] in book_series_list:
+                        continue
+                    else:
+                        book_series_list.append(books[i]['Series Name'])
+                        Series_Counter+=1
+        print("Books in TBR: ", len(books))
+        print("Currently Reading: ", currently_reading_counter)
+        print("Finished: ", Finished_counter)
+        print("DNF: ", DNF_counter)
+        print("Fiction: ", Fiction_counter)
+        print("Non-Fiction: ", Non_Fiction_Counter)
+        print("Series: ", Series_Counter)
+        print("Standalone: ", Standalone_Counter)
+  
