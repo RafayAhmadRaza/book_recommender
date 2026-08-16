@@ -72,7 +72,6 @@ def update_book(Name,status):
             for i in books:
                 if i['Title'][:len(Name)] == Name:
                     book_to_update_list.append(i)
-                    print("Book")
                 else:
                     continue
 
