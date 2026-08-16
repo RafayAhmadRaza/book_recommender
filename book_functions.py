@@ -117,5 +117,36 @@ def update_book(Name,status):
 
 def recommend_book():
     with open(path,"r") as f:
-        books = json.dump(f)
-        random.choice(books)
+        books_list = json.load(f)
+        books  = []
+        for i in range(len(books_list)):
+            if books_list[i]["Status"] == "Read" or books_list[i]['Status'] == "Currently Reading" or books_list[i]["Status"] == "Did Not Finish":
+                continue
+            else:
+                books.append(books_list[i])
+
+        book = random.choice(books)
+        
+
+        if book['Series Name'] != None:
+            series_book = []
+            for i in range(len(books)):
+                if book['Series Name'] == books[i]['Series Name']:
+                    series_book.append(books[i])
+                else:
+                    continue
+            if len(series_book) == 1:
+                print("This Books is part of a series! Do add the other books in the series!")
+                print(book['Title'])
+            else:
+                for i in range(len(series_book)):
+                    if book['Series No'] > series_book[i]['Series No']:
+                        if series_book[i]['Status'] == "Not Read":
+                            print(f"The Book is number {book['Series No']} in the series")
+                            print(f"Please Read {series_book[i]['Title']}")
+                            break
+                    else:
+                        print(book['Title'])
+        else:
+
+            print(book)

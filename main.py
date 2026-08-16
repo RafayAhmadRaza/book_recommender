@@ -40,6 +40,9 @@ elif argument == 'update':
             current_status = "Not Read"
 
     book_functions.update_book(name,current_status)
+elif argument == 'recommend':
+    print("Please wait recommending book!")
+    book_functions.recommend_book()
 
 else:
     print("Invalid Arguments")
