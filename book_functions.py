@@ -60,7 +60,7 @@ def list_books():
         with open(path,'r') as f:
             books = json.load(f)
             for i in books:
-                print(i['Title'] +" " +i['Status'])
+                print(i['Title'] +" " +i['Status'] + " " + i["Genres"])
     else:
         print("Error .json database does not exist.")
 
@@ -142,14 +142,32 @@ def recommend_book():
                 for i in range(len(series_book)):
                     if book['Series No'] > series_book[i]['Series No']:
                         if series_book[i]['Status'] == "Not Read":
+                            print(f"The Book recommend is: \n{book['Title']}")
                             print(f"The Book is number {book['Series No']} in the series")
                             print(f"Please Read {series_book[i]['Title']}")
+                            break
+                        if series_book[i]['Status'] == "Currently Reading":
+                            print("You are already reading a book from this series! Recommending another book")
+                            series_name = series_book[0]['Series Name']
+                            filtered_book_list = []
+
+                            for i in range(len(books)):
+                                if books[i]["Series Name"] == series_name:
+                                    continue
+                                else:
+                                    if books[i]["Status"] == "Not Read":
+                                        filtered_book_list.append(books[i])
+
+                            new_book = random.choice(filtered_book_list)
+
+                            print("New book is!")
+                            print(f"{new_book['Title']}")
                             break
                     else:
                         print(book['Title'])
         else:
 
-            print(book)
+            print(book['Title'])
 def currently_reading():
     with open(path,"r") as f:
         books = json.load(f)
