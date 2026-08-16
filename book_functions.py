@@ -146,6 +146,7 @@ def recommend_book():
                             print(f"The Book is number {book['Series No']} in the series")
                             print(f"Please Read {series_book[i]['Title']}")
                             break
+                        
                         if series_book[i]['Status'] == "Currently Reading":
                             print("You are already reading a book from this series! Recommending another book")
                             series_name = series_book[0]['Series Name']
@@ -165,6 +166,7 @@ def recommend_book():
                             break
                     else:
                         print(book['Title'])
+                        break
         else:
 
             print(book['Title'])
