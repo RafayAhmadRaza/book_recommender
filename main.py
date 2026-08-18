@@ -5,6 +5,13 @@ arguments = sys.argv[1:]
 
 if len(arguments) != 1:
     print(f"Error Required 1 Arguments Given {len(arguments)}")
+    print("" \
+    "add - Add A New Book\n" \
+    "update - Update Status Of Any Existing Book\n" \
+    "list - List All Book Title with Current Status\n" \
+    "stats - Lists Stats Of Books\n" \
+    "current - Shows Books with stauts of 'Currently Reading'" \
+    "")
     sys.exit()
 
 argument = arguments[0]
