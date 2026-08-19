@@ -1,20 +1,20 @@
 import book_functions
 import sys
 
-arguments = sys.argv[1:]
+arguments = sys.argv
 
-if len(arguments) != 1:
-    print(f"Error Required 1 Arguments Given {len(arguments)}")
+if len(arguments) <2:
+    print(f"Error: Command Required")
     print("" \
     "add - Add A New Book\n" \
     "update - Update Status Of Any Existing Book\n" \
-    "list - List All Book Title with Current Status\n" \
+    "list - List All Book Title with Current Status (-a or -d)\n" \
     "stats - Lists Stats Of Books\n" \
-    "current - Shows Books with stauts of 'Currently Reading'" \
+    "current - Shows Books with status of 'Currently Reading'" \
     "")
     sys.exit()
 
-argument = arguments[0]
+argument = arguments[1]
 
 
 if argument == "add":
@@ -31,7 +31,17 @@ if argument == "add":
     book_type = input("Enter Book Type (F (Fiction) Or NF (Non Fiction)): ")
     book_functions.add_book(title,author,series_name,series_no,genre,book_type)
 elif argument == "list":
-    book_functions.list_books()
+
+    if len(arguments) > 3:
+        print("Error: Too many arguments for list.")
+        sys.exit()
+
+    if "-a" in sys.argv:
+        book_functions.list_books(reverse=False)
+    elif "-d" in sys.argv:
+        book_functions.list_books(reverse=True)
+    else:
+        book_functions.list_books()
 elif argument == 'update':
     name =  input("Enter Title of the book: ")
     status = input("Enter Status of Book (R-Read CR-Currently Reading, DNF- Did Not Finish, NR- Not Read): ")

@@ -53,11 +53,11 @@ def add_book(Title, Author, Series_Name, Series_No, Genre, Book_Type):
             json.dump(books, f, indent=4)
 
 
-def list_books():
+def list_books(reverse=False):
     if os.path.exists(path):
         with open(path, "r") as f:
             books = json.load(f)
-            books = sorted(books,key=lambda book: book['Title'])
+            books = sorted(books,reverse=reverse,key=lambda book: book['Title'])
             for i in books:
                 print(i["Title"] + " " + i["Status"] + " " + i["Genres"])
     else:
