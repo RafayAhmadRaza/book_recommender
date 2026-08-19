@@ -57,6 +57,7 @@ def list_books():
     if os.path.exists(path):
         with open(path, "r") as f:
             books = json.load(f)
+            books = sorted(books,key=lambda book: book['Title'])
             for i in books:
                 print(i["Title"] + " " + i["Status"] + " " + i["Genres"])
     else:
