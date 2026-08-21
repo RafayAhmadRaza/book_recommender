@@ -3,15 +3,17 @@ import sys
 
 arguments = sys.argv
 
-if len(arguments) <2:
-    print(f"Error: Command Required")
-    print("" \
-    "add - Add A New Book\n" \
-    "update - Update Status Of Any Existing Book\n" \
-    "list - List All Book Title with Current Status (-a or -d)\n" \
-    "stats - Lists Stats Of Books\n" \
-    "current - Shows Books with status of 'Currently Reading'" \
-    "")
+if len(arguments) < 2:
+    print("Error: Command Required")
+    print(
+        ""
+        "add - Add A New Book\n"
+        "update - Update Status Of Any Existing Book\n"
+        "list - List All Book Title with Current Status (-a or -d)\n"
+        "stats - Lists Stats Of Books\n"
+        "current - Shows Books with status of 'Currently Reading\n'"
+        "recommend - Recommends a random book"
+    )
     sys.exit()
 
 argument = arguments[1]
@@ -20,7 +22,9 @@ argument = arguments[1]
 if argument == "add":
     title = input("Enter Book's Title: ")
     author = input("Enter Book's Author: ")
-    series_name = input("Enter Book's Series Name If Applicable(Type None if not a series): ")
+    series_name = input(
+        "Enter Book's Series Name If Applicable(Type None if not a series): "
+    )
     series_no = 0
     if series_name.lower() != "none":
         series_no = int(input("Enter Book's Series Number If Applicable: "))
@@ -29,9 +33,8 @@ if argument == "add":
 
     genre = input("Enter Book's Genre: ")
     book_type = input("Enter Book Type (F (Fiction) Or NF (Non Fiction)): ")
-    book_functions.add_book(title,author,series_name,series_no,genre,book_type)
+    book_functions.add_book(title, author, series_name, series_no, genre, book_type)
 elif argument == "list":
-
     if len(arguments) > 3:
         print("Error: Too many arguments for list.")
         sys.exit()
@@ -42,9 +45,11 @@ elif argument == "list":
         book_functions.list_books(reverse=True)
     else:
         book_functions.list_books()
-elif argument == 'update':
-    name =  input("Enter Title of the book: ")
-    status = input("Enter Status of Book (R-Read CR-Currently Reading, DNF- Did Not Finish, NR- Not Read): ")
+elif argument == "update":
+    name = input("Enter Title of the book: ")
+    status = input(
+        "Enter Status of Book (R-Read CR-Currently Reading, DNF- Did Not Finish, NR- Not Read): "
+    )
     current_status = None
     match status:
         case "R":
@@ -56,14 +61,14 @@ elif argument == 'update':
         case "NR":
             current_status = "Not Read"
 
-    book_functions.update_book(name,current_status)
-elif argument == 'recommend':
+    book_functions.update_book(name, current_status)
+elif argument == "recommend":
     print("Please wait recommending book!")
     book_functions.recommend_book()
-elif argument == 'current':
+elif argument == "current":
     print("Currently Reading:")
     book_functions.currently_reading()
-elif argument == 'stats':
+elif argument == "stats":
     print("Books Stats!")
     book_functions.stats()
 
